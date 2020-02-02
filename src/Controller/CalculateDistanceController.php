@@ -19,8 +19,10 @@ class CalculateDistanceController extends AbstractController
      */
     public function index(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $distances = new Distances();
         $form = $this->createForm(DistancesType::class, $distances);
+
 
         // find lat, long of the ipAdress 
        
@@ -32,40 +34,42 @@ class CalculateDistanceController extends AbstractController
         // find lat, long of the postAdress
 
         if ($request->isMethod('POST')) {
-       
-           
-
         
             $form->handleRequest($request);
             if ($form->isValid()) {
                 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($distances);
-                $em->flush();
-                return $this->render('calculate_distance/index.html.twig', [
-                        'form' => $form->createView()
-                ]);
-                 // Add a flash session message
-                $this->addFlash('info', 'A calculated distance has been approved');
-                $ip = $form->get('ipAddress');
+                //Get the ipAdress from the form before been submitted 
+                $ip = $form['ipAddress']->getData();
                 $url = "{$api_url}?apiKey={$api_key}&ipAddress={$ip}";
                 $result = file_get_contents($url);
                 $result = json_decode($result, true);
                 $lat1 =  $result['location']['lat'];
                 $lng1 =  $result['location']['lng']; 
 
-                $adress = $form->get('postalAddress');
+                $adress = $form['postalAddress']->getData();
         
-                $url = "{$api_url}?apiKey={$api_key}&Address={$adress}";
+                $url = "{$api_url}?apiKey={$api_key}&address={'12 Rue Cortot, 75018 Paris France'}";
                 $result=file_get_contents($url);
                 $result = json_decode($result, true);
         
                 $lat2 =  $result['location']['lat'];
                 $lng2 =  $result['location']['lng']; 
-            }
+                $distance_km =  $this->distance($lat1, $lng1, $lat2, $lng2, "K");
+
+                //call the function calculate distance below (it use the lat,lng to calculate distance) 
+                $distances->setDistance($distance_km);
+                
+                //dump($distances);
+                //dump($lat1,$lng2,$lat2,$lng2);
+                //$form->get('distance')->submit($distance_km);
+
+                 // Add a flash session message to be able to show the distance as I am using the same rendring 
+                $this->addFlash('info', 'the distance between the ipAdress location and the postal adress is :'.$distance_km.' km');
+                $em->persist($distances);
+                $em->flush();
+                
+            }       
             
-            $distance_km =  $this->distance($lat1, $lng1, $lat2, $lng2, "K");
-            get('distance')->submit($distance_km);
         }
 
         return $this->render('calculate_distance/index.html.twig', [

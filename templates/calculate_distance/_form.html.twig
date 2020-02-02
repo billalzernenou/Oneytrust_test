@@ -3,17 +3,24 @@
 
 
 <h3>Formulaire distance</h3>
-<div class="well">
-    <div class="form-group">
+<div class="form-group">
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
     
      {{ form_row(form.ipAddress) }}
      {{ form_row(form.postalAddress) }}
-     {{ form_row(form.distance) }}
-     {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+     {{ form_widget(form.calculate, {'attr': {'class': 'btn btn-primary'}}) }}
      {{ form_rest(form) }}
-  
+     {{ form_errors(form) }}
+
     {{ form_end(form) }}
+    <div>
+
+      {# Show the last distance has been calculated#}
+     {% for message in app.flashes('info') %}
+       <p>Message flash : {{ message }}</p>
+     {% endfor %}
+   </div>
+
   </div>
 </div>
 

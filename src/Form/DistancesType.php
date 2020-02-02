@@ -15,8 +15,7 @@ class DistancesType extends AbstractType
         $builder
             ->add('ipAddress')
             ->add('postalAddress')
-            ->add('distance')
-            ->add('save', SubmitType::class)
+            ->add('calculate', SubmitType::class)
         ;
     }
 

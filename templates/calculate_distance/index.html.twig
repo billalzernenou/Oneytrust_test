@@ -6,17 +6,15 @@
   Calculate a distance - {{ parent() }}
 {% endblock %}
 
-{% block body %}
+{% block body  %}
+{% block calculate_body %}
 
-  <h2>Calculate a distance/h2>
+  <h2>Calculate a distance </h2>
 
   {{ include("calculate_distance/_form.html.twig") }}
-
   <p>
     Vous éditez une annonce déjà existante, merci de ne pas changer
     l'esprit général de l'annonce déjà publiée.
   </p>
-
-
-   
+  {% endblock %}
 {% endblock %}

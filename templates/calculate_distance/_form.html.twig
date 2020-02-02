@@ -1,0 +1,23 @@
+{# templates/calculate_distance/_form.html.twig #}
+
+
+
+<h3>Formulaire distance</h3>
+<div class="well">
+    <div class="form-group">
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    
+     {{ form_row(form.ipAddress) }}
+     {{ form_row(form.postalAddress) }}
+     {{ form_row(form.distance) }}
+     {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+     {{ form_rest(form) }}
+  
+    {{ form_end(form) }}
+  </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+

@@ -1,0 +1,22 @@
+{# templates/calculate_distance/index.html.twig #}
+
+{% extends "layout.html.twig" %}
+
+{% block title %}
+  Calculate a distance - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Calculate a distance/h2>
+
+  {{ include("calculate_distance/_form.html.twig") }}
+
+  <p>
+    Vous éditez une annonce déjà existante, merci de ne pas changer
+    l'esprit général de l'annonce déjà publiée.
+  </p>
+
+
+   
+{% endblock %}

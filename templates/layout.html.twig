@@ -1,0 +1,51 @@
+{# template/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}OC Plateforme{% endblock %}</title>
+
+  {% block stylesheets %}
+    {# On charge le CSS de bootstrap depuis le site directement #}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  {% endblock %}
+</head>
+
+<body>
+
+  <div class="container">
+    <div id="header" class="jumbotron">
+      <h1>Calculate distance</h1>
+      <p>
+        The purpose of this form is to calculate the distance between a postal address and an IP address. 
+         
+                
+      </p>
+      <p>
+        the postal address must respect this pattern: “12 Rue Cortot, 75018 Paris France”.        
+      </p>
+      <p>
+        <a class="btn btn-primary btn-lg" href="https://github.com/billalzernenou/Oneytrust_test">
+          Voir Code Source»
+        </a>
+      </p>
+    </div>
+    
+  </div>
+  
+  {% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  {% endblock %}
+</body>
+</html>
+
+
+
+
+
+
